@@ -8,11 +8,7 @@ public class RetrofitClientInstance {
 
     private static Retrofit retrofit;
 
-
-    //private static final String BASE_URL = "http://demo8434239.mockable.io";
-    //private static final String BASE_URL = "https://api-coupons1.herokuapp.com";
-
-    private static final String BASE_URL = "http://demo7450099.mockable.io/";
+    private static final String BASE_URL = "http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/tellme/public/api/";
 
 
     public static Retrofit getRetrofitInstance() {

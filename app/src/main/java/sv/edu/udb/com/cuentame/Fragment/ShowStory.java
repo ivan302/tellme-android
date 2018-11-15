@@ -20,6 +20,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sv.edu.udb.com.cuentame.Adapter.StoryAdapter;
 import sv.edu.udb.com.cuentame.Interface.GetDataService;
+import sv.edu.udb.com.cuentame.Models.ResponseStory;
+import sv.edu.udb.com.cuentame.Models.SectionsItem;
+import sv.edu.udb.com.cuentame.Models.StoriesItem;
 import sv.edu.udb.com.cuentame.Network.RetrofitClientInstance;
 import sv.edu.udb.com.cuentame.Plain.Story;
 import sv.edu.udb.com.cuentame.R;
@@ -28,7 +31,7 @@ public class ShowStory extends Fragment {
 
     View mView;
     RecyclerView recyclerView;
-    List<Story> stories;
+    List<SectionsItem> stories;
     StoryAdapter adapter;
 
 
@@ -47,17 +50,17 @@ public class ShowStory extends Fragment {
         /**Recycler*/
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class );
-        Call<List<Story>> call = service.getData();
-        call.enqueue( new Callback<List <Story>>() {
+        Call<ResponseStory> call = service.getStories();
+        call.enqueue( new Callback<ResponseStory>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
-            public void onResponse(Call <List <Story>> call, Response<List <Story>> response) {
-                generateDataList( response.body() );
+            public void onResponse(Call <ResponseStory> call, Response<ResponseStory> response) {
+                generateDataList(response.body().getData());
             }
 
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
-            public void onFailure(Call <List <Story>> call, Throwable t) {
+            public void onFailure(Call <ResponseStory> call, Throwable t) {
                 Toast.makeText( getContext(), "Parece que tenemos problemas, porfavor intente mas tarde", Toast.LENGTH_SHORT ).show();
             }
         } );
@@ -74,7 +77,7 @@ public class ShowStory extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void generateDataList(List<Story> body) {
+    private void generateDataList(List<StoriesItem> body) {
         recyclerView = mView.findViewById(R.id.mrecycler);
         adapter = new StoryAdapter(ShowStory.this.getContext(),body);                  //number of columns
         recyclerView.setLayoutManager(new GridLayoutManager(ShowStory.this.getContext(), 3 ));

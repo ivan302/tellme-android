@@ -3,6 +3,7 @@ package sv.edu.udb.com.cuentame.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,20 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sv.edu.udb.com.cuentame.MainActivity;
+import sv.edu.udb.com.cuentame.Models.SectionsItem;
+import sv.edu.udb.com.cuentame.Models.StoriesItem;
 import sv.edu.udb.com.cuentame.Plain.Story;
 import sv.edu.udb.com.cuentame.R;
+
+import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHolder> {
 
 
-    List<Story> stories;
+    List<StoriesItem> stories;
     Context context;
 
-    public StoryAdapter(Context context, List<Story> stories) {
+    public StoryAdapter(Context context, List<StoriesItem> stories) {
         this.context = context;
         this.stories = stories;
     }
@@ -42,22 +47,19 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
 
     @Override
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int i) {
-        holder.txtTitle.setText(stories.get(i).getTitle());
+        holder.txtTitle.setText(stories.get(i).getName());
 
 
-
-       try{
-            Picasso.Builder builder = new Picasso.Builder(context);
-            builder.downloader(new OkHttp3Downloader(context));
-            builder.build().load(stories.get(i).getImage())
-                    .placeholder((R.drawable.ic_launcher_background))
-                    .error(R.drawable.ic_launcher_background)
-                    .into(holder.spacePhoto);
-
-        }catch (Exception e){
-
-           Toast.makeText(context, "Error:" + e.getMessage() , Toast.LENGTH_SHORT).show();
-        }
+try {
+    Picasso.Builder builder = new Picasso.Builder(context);
+    builder.downloader(new OkHttp3Downloader(context));
+    builder.build().load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/tellme/public/images/" + stories.get(i).getUrl())
+            .placeholder((R.drawable.ic_launcher_background))
+            .error(R.drawable.ic_launcher_background)
+            .into(holder.spacePhoto);
+}catch (Exception e){
+    Toast.makeText(context, "Please wait.." + e.getMessage(), Toast.LENGTH_SHORT).show();
+}
 
     }
 
@@ -95,7 +97,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<Story> list) {
+    public void addAll(List<StoriesItem> list) {
         stories.addAll(list);
         notifyDataSetChanged();
     }

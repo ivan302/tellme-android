@@ -1,15 +1,13 @@
 package sv.edu.udb.com.cuentame.Interface;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
-import sv.edu.udb.com.cuentame.Plain.Story;
+import sv.edu.udb.com.cuentame.Models.ResponseStory;
 
 public interface GetDataService {
 
-    @GET("data")
-    Call<List<Story>> getData();
+    @GET("/tellme/public/api/stories")
+    Call<ResponseStory> getStories();
 
 
 }
