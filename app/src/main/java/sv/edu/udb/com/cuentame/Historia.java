@@ -102,7 +102,7 @@ public class Historia extends AppCompatActivity {
                         .into(imagen);
                 textToSpeak=sections.getDescription();
 
-                Toast.makeText(this, "Holoooo" + sections.getUrl(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Holoooo" + sections.getUrl(), Toast.LENGTH_SHORT).show();
 
             }catch (Exception e){
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "466948880514",
+    "firebase_url": "https://tellme-android.firebaseio.com",
+    "project_id": "tellme-android",
+    "storage_bucket": "tellme-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466948880514:android:c20aea3187a4861e",
+        "android_client_info": {
+          "package_name": "sv.edu.udb.com.cuentame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466948880514-1hoj1k8j52s75tsft44jhjurl47cc3p3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.edu.udb.com.cuentame",
+            "certificate_hash": "3b2be7ac6ef3e423327a18daa687d572db39b088"
+          }
+        },
+        {
+          "client_id": "466948880514-74bd6hevc326pccvjjfil49n4v0u2t10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMhn_XBskD4BaTURs4MSMWFUz76vkqChU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466948880514-74bd6hevc326pccvjjfil49n4v0u2t10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+       /** FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
 
@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //callbackManager.onActivityResult(requestCode, resultCode, data);
+**/
+
     }
 
 

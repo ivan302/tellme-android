@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
@@ -34,7 +37,9 @@ public class ShowStory extends Fragment {
     RecyclerView recyclerView;
     List<SectionsItem> stories;
     StoryAdapter adapter;
+    private static final String TAG = "ShowStory";
 
+    private AdView mAdView;
 
 
     @Override
@@ -66,6 +71,9 @@ public class ShowStory extends Fragment {
             }
         } );
 
+        mAdView = mView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         /**Finish Recycler**/
