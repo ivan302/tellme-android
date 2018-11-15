@@ -1,7 +1,7 @@
 package sv.edu.udb.com.cuentame.Fragment;
 
 import android.app.Fragment;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -19,13 +19,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sv.edu.udb.com.cuentame.Adapter.StoryAdapter;
+import sv.edu.udb.com.cuentame.Historia;
 import sv.edu.udb.com.cuentame.Interface.GetDataService;
 import sv.edu.udb.com.cuentame.Models.ResponseStory;
 import sv.edu.udb.com.cuentame.Models.SectionsItem;
 import sv.edu.udb.com.cuentame.Models.StoriesItem;
 import sv.edu.udb.com.cuentame.Network.RetrofitClientInstance;
-import sv.edu.udb.com.cuentame.Plain.Story;
 import sv.edu.udb.com.cuentame.R;
+import sv.edu.udb.com.cuentame.commons;
 
 public class ShowStory extends Fragment {
 
@@ -79,8 +80,16 @@ public class ShowStory extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void generateDataList(List<StoriesItem> body) {
         recyclerView = mView.findViewById(R.id.mrecycler);
-        adapter = new StoryAdapter(ShowStory.this.getContext(),body);                  //number of columns
-        recyclerView.setLayoutManager(new GridLayoutManager(ShowStory.this.getContext(), 3 ));
+        adapter = new StoryAdapter(getActivity(), body, new StoryAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(StoriesItem story, int position) {
+
+                Intent intent = new Intent(getActivity(), Historia.class);
+                commons.historia = story;
+                startActivity(intent);
+            }
+        });                  //number of columns
+        recyclerView.setLayoutManager(new GridLayoutManager(ShowStory.this.getContext(), 2 ));
         recyclerView.setAdapter(new AlphaInAnimationAdapter(adapter));
 
 

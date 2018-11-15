@@ -1,33 +1,24 @@
 package sv.edu.udb.com.cuentame;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AccessToken;
 
-import java.util.List;
-
-import sv.edu.udb.com.cuentame.Adapter.StoryAdapter;
 import sv.edu.udb.com.cuentame.Fragment.ShowStory;
 import sv.edu.udb.com.cuentame.Login.LoginActivity;
-import sv.edu.udb.com.cuentame.Plain.Story;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView recyclerView;
-    List<Story> stories;
-    StoryAdapter adapter;
 
 
     @Override

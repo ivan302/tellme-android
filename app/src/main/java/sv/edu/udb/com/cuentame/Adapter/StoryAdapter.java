@@ -3,7 +3,6 @@ package sv.edu.udb.com.cuentame.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,30 +10,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import sv.edu.udb.com.cuentame.MainActivity;
-import sv.edu.udb.com.cuentame.Models.SectionsItem;
 import sv.edu.udb.com.cuentame.Models.StoriesItem;
-import sv.edu.udb.com.cuentame.Plain.Story;
 import sv.edu.udb.com.cuentame.R;
-
-import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHolder> {
 
 
     List<StoriesItem> stories;
     Context context;
+    private onItemClickListener listener;
 
-    public StoryAdapter(Context context, List<StoriesItem> stories) {
+
+    public StoryAdapter(Context context, List<StoriesItem> stories,onItemClickListener listener) {
         this.context = context;
         this.stories = stories;
+        this.listener = listener;
     }
+
 
 
     @NonNull
@@ -46,7 +43,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StoryViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull StoryViewHolder holder, final int i) {
         holder.txtTitle.setText(stories.get(i).getName());
 
 
@@ -60,6 +57,18 @@ try {
 }catch (Exception e){
     Toast.makeText(context, "Please wait.." + e.getMessage(), Toast.LENGTH_SHORT).show();
 }
+
+        holder.spacePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    listener.onItemClick(stories.get(i), i);
+                }catch (Exception e){
+                    Toast.makeText(context, "StoryAdapter" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
     }
 
@@ -100,5 +109,10 @@ try {
     public void addAll(List<StoriesItem> list) {
         stories.addAll(list);
         notifyDataSetChanged();
+    }
+
+    ///declaramos las interfaces con los metodos a implementar
+    public interface onItemClickListener{
+        void onItemClick(StoriesItem story, int position);
     }
 }
